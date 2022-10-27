@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::webhooks('webhook-client-url');
+
+Route::webhooks('webhook-sc-url');
+
+Route::get('/webhooklist', [App\Http\Controllers\WebHook\ServerController::class, 'list'])->name('list');
+Route::get('/shows', [App\Http\Controllers\WebHook\ServerController::class, 'shows'])->name('shows');
+Route::post('/form', [App\Http\Controllers\WebHook\ServerController::class, 'create'])->name('create');
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

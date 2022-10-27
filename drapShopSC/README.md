@@ -5,6 +5,7 @@ php artisan ui:auth
 php artisan ui bootstrap 
 php artisan ui bootstrap --auth
 
+## WebHooks Server
 composer require spatie/laravel-webhook-server
 php artisan vendor:publish --provider="Spatie\WebhookServer\WebhookServerServiceProvider"
 
@@ -14,20 +15,31 @@ php artisan make:model assign_weebhook --migration
 ## Note
 you must create a crud in the WebHook/ServerController
 
+## WebHooks Client
+composer require spatie/laravel-webhook-client
+php artisan vendor:publish --provider="Spatie\WebhookClient\WebhookClientServiceProvider" --tag="webhook-client-config"
+php artisan vendor:publish --provider="Spatie\WebhookClient\WebhookClientServiceProvider" --tag="webhook-client-migrations"
+create php artisan make:model Job\ProcessWebhookJob
+
+edit config\webhook-client.php, switch for ==>>'process_webhook_job' => App\Models\Job\ProcessWebhookJob::class,
+add route: Route::webhooks('webhook-client-url'); in routes\web.php
+add route: protected $except = ['webhook-client-url',]; in app\Http\Middleware\VerifyCsrfToken.php
+
+
 config access database in .env
+create WEBHOOK_CLIENT_SECRET in .env
 create WEBHOOK_CLIENT_SECRET_CLIENT in .env
-create WEBHOOK_CLIENT_SECRET_SC in .env
 php artisan migrate
 php artisan key:generate
 npm install
 npm run dev
-php artisan serve --port=8080
+php artisan serve --port=8888
 
 ## Install 
 composer install
 npm install
 npm run dev
-php artisan serve --port=8080
+php artisan serve --port=8888
 
 ## License
 

@@ -37,14 +37,10 @@ class ServerController extends Controller
         $data["id"] = $r->id;
         $rs =[
             "WEBHOOK_CLIENT_SECRET" => env('WEBHOOK_CLIENT_SECRET_CLIENT'),
-            "WEBHOOK_CLIENT_URL" => env('WEBHOOK_CLIENT_SECRET_CLIENT_URL')
+            "WEBHOOK_CLIENT_URL" => env('WEBHOOK_CLIENT_SECRET_CLIENT_URL'),
         ];
-        $this->index("furion", $data,$rs);
-        $rs =[
-            "WEBHOOK_CLIENT_SECRET" => env('WEBHOOK_CLIENT_SECRET_SC'),
-            "WEBHOOK_CLIENT_URL" => env('WEBHOOK_CLIENT_SECRET_SC_URL')
-        ];
-        $this->index("sc", $data,$rs);        
+        $this->index("drapshopSC", $data,$rs);
         return view('form');
     }
 }
+
