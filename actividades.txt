@@ -1,0 +1,79 @@
+se creo demo de cliente en local DOCUMENTACION "funcional"
+se creo demo de server en local DOCUMENTACION "funcional"
+se creo demo de cliente-servidor en local DOCUMENTACION "funcional"
+se creo de forma estandar los metodos para enviar eventos en local DOCUMENTACION "en proceso"
+se creo de forma estandar los metodos para recibir eventos en local DOCUMENTACION "en proceso"
+
+Actividades de Heriberto
+actualizacion de ultima version de PHP 8.1 (Heriberto) Pendiente ==>> Actual 7.3  ==> tiempo 2 dias habiles
+actualizacion de ultima version de LARAVEL 9.36.4 (Heriberto) Pendiente ==>> Actual 7.7.3 ==> tiempo 2 dias habiles
+
+realizar pruebas de todo el sistema ==> tiempo al meno una semana (dias habiles)
+NOTA: aqui se va a probar el flujo de compra en las 3 APPS (customer, partner, driver), se va revisar creacion de cuenta 
+customer, partner y driver. Notification y proceso de pago, respoce, creacion de productos, etc. 
+
+NOTA: se debe realizar prueba de todo el sistema para revisar si no hay conflicto en las librerias del sistema,
+debido que la version actual no permite implementar Webhook (CLIENT/SERVER) para recibir y enviar datos a OTTER.
+
+Actividades de Xavier
+A - INSTALAR CLIENTE/SERVIDOR WEBHOOK EN DRAPSHOP ==>> no realizado, esperando actualizacion del sistema 
+B - configuracion del CLIENTE/SERVIDOR en el sistema DRAPSHOP
+
+tiempo de ejecucion de la actividad A y B ==> 2 dias habiles
+
+C - FLUJO DE COMPRA
+        C-1 EVENTOS DEL CUSTOMER 
+                crear orden (server)
+                respuesta de otter ==> crear la orden (cliente)
+
+                cancelar orden (server)        
+                respuesta de otter ==> cancelar la orden (cliente)
+
+        C-2 EVENTOS DEL PARTNER
+                aceptar la orden (server)
+                respuesta de otter ==> aceptar la orden(cliente)
+
+                cancelar la orden (server)
+                respuesta de otter ==> cancelar la orden(cliente)
+
+        C-3 EVENTOS DEL DRIVER
+                aceptar la orden (server)
+                respuesta de otter ==> aceptar la orden(cliente)
+
+                declinar orden (server)
+                respuesta de otter ==> declinar la orden(cliente)
+
+                completar orden (server)
+                respuesta de otter ==> completar la orden(cliente)
+    
+tiempo de ejecucion de la actividad C ==> 5 a 6 dias habiles
+
+D- FLUJO DE CONFIGURACION DE PARTNER
+        D-1 EVENTOS PARTNER
+                partner_status (server)
+                respuesta de otter ==> partner_status(cliente)
+                
+                partner_schedule (server)
+                respuesta de otter ==> partner_schedule(cliente)
+                
+                create_menu (server)
+                respuesta de otter ==> create_menu(cliente)
+                
+                edit_menu (server)
+                respuesta de otter ==> edit_menun(cliente)
+                
+                delete_menu (server)
+                respuesta de otter ==> delete_menu(cliente)
+                
+                status_menu (server)
+                respuesta de otter ==> status_menu(cliente)
+                
+                cupon_menu (server)
+                respuesta de otter ==> cupon_menu(cliente)
+
+tiempo de ejecucion de la actividad D ==> 6 a 7 dias habiles
+pruebas de emicion y receccion de evento por postman 3 dias habiles
+NOTA: se desconoce si otto tiene ambiente de prueba.
+
+estos son los eventos detectados hasta hoy, durante el proceso de desarrollo se puede encontrar eventos que 
+impacte en la implementacion del deaserrollo o se agregue nuevos eventos solicitados por otter.

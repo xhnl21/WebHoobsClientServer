@@ -1,0 +1,117 @@
+##primera Pagina
+
+Correo electrónico*: 
+    xavier.nunez@drapshop.com
+
+Application Name*: 
+    development
+
+Website URL*: 
+    https://dev.draplovers.com
+
+Link to Your Logo*: 
+    https://dev.draplovers.com/uploads/logo.webp
+
+Webhook URL*:
+    https://dev.draplovers.com/api/otter/orders
+
+What Authentication Type do you want to use for the Webhook events*:        
+    Bearer Token
+
+##segunda pagina:
+
+Please provide the Token for us to use*:
+    kZN2g9Tg6-+mi1YNc+s-SiZAO2ljl-QBfLC3ByJ-LhLAUVcop
+
+##tercera pagina:
+
+Integration Type*:
+    Ordering
+
+##cuarta pagina:
+
+Storefront Functionality Supported*:
+    true
+
+Menu Functionality Supported*:
+    false
+
+##quinta pagina:
+
+Send Menu Supported*:
+    true
+
+Menu Publish Supported*:
+    true
+
+Multiple Menus Supported*:
+    true
+
+Other Menu Functionality:(checkbox)
+    -Categories can be part of multiple menus
+    -Items can be part of multiple categories
+    -Modifier Groups can be used on multiple items
+    -Modifiers can be used in multiple modifier groups
+    -Items can also be used as modifiers
+    -Alcohol sales supported
+
+The number of nested modifier groups supported. 1 indicates that nested modifiers are not supported.:
+    1
+
+Photo Functionality Supported*:
+    true
+
+##sexta pagina:
+
+Photos can be used for multiple items:
+    true
+
+Maximum Photo File Size (in KB)*:
+    Any
+
+Recommended Photo Aspect Ratio*:
+    Any
+
+Minimum Photo Width (in Pixels)*:
+    Any
+
+Minimum Photo Height (in Pixels)*:
+    Any
+
+Maximum Photo Width (in Pixels)*:
+    Any
+
+Maximum Photo Height (in Pixels)*:
+    Any
+
+##septima pagina:
+
+Menu Hours Functionality:(checkbox)
+    -Menu Hours publish supported
+    -"Special" Hours publish supported
+
+We stop sending orders X minutes before close:
+    sin respuesta
+
+86 Functionality Supported*:
+    true
+
+##octava pagina:
+
+86 Functionality:(checkbox)
+    -Indefinite 86 for items supported
+    -Temporary 86 for items supported
+    -Indefinite 86 for modifiers supported
+    -Temporary 86 for modifiers supported
+
+##novena pagina:
+
+Begin Development*:
+
+Complete Development and Begin Internal Testing*:
+
+Schedule Integration Validation*:
+
+Begin Pilot Testing*:
+
+End Pilot Testing, Go To Market*:

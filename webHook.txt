@@ -1,0 +1,69 @@
+xavier.nunez@drapshop.com
+2491987xavier
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+Request::server('HTTP_USER_AGENT');
+////
+$request->userAgent();
+////
+$request->header('User-Agent');
+////
+$request->server('HTTP_USER_AGENT');
+use dd($request);
+
+
+WebhookCall::create()
+   ->url('https://other-app.com/webhooks')
+    ->withHeaders([
+        'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
+        'Authorization' => 'Bearer token-demo-123',
+        'Content-Type' => 'application/json'
+    ])
+    ->meta($arrayWithMetaInformation)
+    ->payload(['key' => 'value'])
+    ->useSecret('sign-using-this-secret')
+    ->dispatch();
+   
+
+crear tabla otterWebHook = [id, partnerId, storeId, applicationId, resourceId]
+
+Notification Schema
+Name	                    Type	Description
+eventId	                    string	Unique id of the event. (este se genera cuando se hace una orden)
+eventTime	                string	The time the event occurred. (este se genera cuando se hace una orden)
+eventType	                string	The type of event (e.g. create_order). (indicar el tipo de evento)
+metadata.storeId	        string	Id of the store for which the event is being published. (este es un ID unico que se genera cuando se asocia el partner a otto)
+metadata.applicationId	    string	Id of the application for which the event is being published. (este ID se encuentra en la pagina de: Developer Portal->setting->CLIENT ID)
+metadata.resourceId	        string	The external identifier of the resource that this event refers to.
+metadata.resourceHref	    string	The endpoint to fetch the details of the resource.
+metadata.payload	        object	The event object which will be detailed in each Webhook description.
+
+/////
+resourceHref
+new_order: https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c
+cancel_order: https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c/cancel
+send_menus: https://{{public-api-url}}/v1/menus/current
+send_publish: https://{{public-api-url}}/v1/menus/publish
+suspender_menu: https://{{public-api-url}}/v1/menus/entity/availability/bulk 
+upsert_hours: https://{{public-api-url}}/v1/menus/hours (hora donde el menu o platillo esta disponible)
+/////
+
+curl --location --request POST 'https://{{your-server-url}}/webhook' \
+--header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36' \
+--header 'Authorization: MAC <hash signature>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "eventId": "123456",
+   "eventTime": "2020-10-10T20:06:02:123Z",
+   "eventType": "orders.new_order",
+   "metadata": {
+      "storeId": "755fd19a-7562-487a-b615-171a9f89d669",
+      "applicationId": "e22f94b3-967c-4e26-bf39-9e364066b68b",
+      "resourceHref": "https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c",
+      "resourceId": "bf9f1d81-f213-496e-a026-91b6af44996c",
+      "payload": {}
+   }
+}'
+ejemplo de JSON en WEBHOOK
+https://developer-guides-staging.tryotter.com/api-reference/#operation/orderCreateWebhook
