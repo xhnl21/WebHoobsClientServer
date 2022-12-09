@@ -28,16 +28,40 @@ class ServerController extends Controller
         ];        
         $r = assign_weebhook::create($data);
         
+        // The following credentials will allow you to authenticate in Otter's API in our testing environment.
+        // Once you have been approved for production locations, you will receive separate credentials.
+        // * API Host: https://partners.cloudkitchens.com
+        // * API Client ID: b89431e4-1d7d-47fc-a079-945dd08a49ab
+        // * API Client Secret (Testing): FPG3UO73YHGY7ISZBAZA
+        // * Webhook HMAC Secret (Testing): 2HVSIKHFGBYIGCLKZPXA
+        // * Testing Test Location IDs are located in our Developer Portal
+
+        
+        // $config = [
+        //     "WEBHOOK_CLIENT_SECRET" => env('WEBHOOK_CLIENT_SECRET_CLIENT'),
+        //     "WEBHOOK_CLIENT_URL" => env('WEBHOOK_CLIENT_SECRET_CLIENT_URL'),
+        //     "typeApp" => "customer",
+        //     "eventType" => "create_order",
+        //     "userAgent" => $userAgent,
+        //     "Authorization" => "Bearer token-demo-123"
+        // ];
+        // $metadata = [
+        //     "storeId" => "a0bbe024-e6e1-38a3-90e0-81f9826e2449",
+        //     "applicationId" => "7fb26116-585f-4496-8432-d1a6b99b4f68",            
+        //     "resourceId" => "bf9f1d81-f213-496e-a026-91b6af44996c",
+        //     "payload" => (object) $data,
+        //     "resourceHref" => "https://{{public-api-url}}/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c",
+        // ];        
         $config = [
-            "WEBHOOK_CLIENT_SECRET" => env('WEBHOOK_CLIENT_SECRET_CLIENT'),
-            "WEBHOOK_CLIENT_URL" => env('WEBHOOK_CLIENT_SECRET_CLIENT_URL'),
+            "WEBHOOK_CLIENT_SECRET" => 'FPG3UO73YHGY7ISZBAZA',
+            "WEBHOOK_CLIENT_URL" => 'https://partners.cloudkitchens.com/v1/orders/bf9f1d81-f213-496e-a026-91b6af44996c',
             "typeApp" => "customer",
-            "eventType" => "create_order",
+            "eventType" => "orders.create",
             "userAgent" => $userAgent,
-            "Authorization" => "Bearer token-demo-123"
-        ];
+            "Authorization" => "Bearer token-2HVSIKHFGBYIGCLKZPXA"
+        ];        
         $metadata = [
-            "storeId" => "a0bbe024-e6e1-38a3-90e0-81f9826e2449",
+            "storeId" => "2b3c8a1b-ddd6-4ff7-982b-55f42ad907fb",
             "applicationId" => "7fb26116-585f-4496-8432-d1a6b99b4f68",            
             "resourceId" => "bf9f1d81-f213-496e-a026-91b6af44996c",
             "payload" => (object) $data,
@@ -46,7 +70,7 @@ class ServerController extends Controller
         $d = [
             "eventId" => $r->id,
             "eventTime" => date("Y-m-d H:i:s"),
-            "eventType" => "create_order",
+            "eventType" => "orders.create",
             "metadata" => (object) $metadata            
         ];
 
@@ -56,9 +80,7 @@ class ServerController extends Controller
     }
 
     public function curlWebHookNative($d, $config) {
-        $r = $this->WebHookTypeApp($d, $config);
-        
-        // public function curlWebHookNative(Request $request, $config) {        
+        // $r = $this->WebHookTypeApp($d, $config);   
         // https://webhook.site/#!/b8e2b18c-dfc4-4e26-8d66-dafb5417dff0/ae9bb6a4-4202-40a0-b254-ca1bbf6da1db/1
         // $url = 'https://webhook.site/b8e2b18c-dfc4-4e26-8d66-dafb5417dff0';
         $url = $config["WEBHOOK_CLIENT_URL"];
@@ -86,8 +108,11 @@ class ServerController extends Controller
         curl_setopt($curl, CURLOPT_HEADER, 1);
         curl_setopt($curl, CURLOPT_TIMEOUT, 30);
         $response = curl_exec($curl);
+        
+        logger($response);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
+        logger($http_code);
         // if ($http_code >= 200 && $http_code < 300) {
         //     echo "webhook send successfully.";
         // } else {
